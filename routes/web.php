@@ -26,3 +26,22 @@ Route::get('/about', function () {
         "umur" => 15
     ]);
 });
+
+Route::get('/posts', function () {
+    $data_blog = [
+        [
+            "title" => "Blog 1",
+            "author" => "Hermawan Tan",
+            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla maxime iste aut minus esse a non similique repudiandae, ut quisquam ipsam. Illo enim repellat nisi dignissimos, mollitia ducimus atque id asperiores aliquam qui voluptatum natus omnis cumque est sapiente, recusandae maiores. Maxime expedita blanditiis nihil voluptatem, est velit impedit adipisci."
+        ],
+        [
+            "title" => "Blog 2",
+            "author" => "Romashon",
+            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla maxime iste aut minus esse a non similique repudiandae, ut quisquam ipsam. Illo enim repellat nisi dignissimos, mollitia ducimus atque id asperiores aliquam qui voluptatum natus omnis cumque est sapiente, recusandae maiores. Maxime expedita blanditiis nihil voluptatem, est velit impedit adipisci."
+        ]
+    ];
+    return view('posts', [
+        "title" => "Posts",
+        "posts" => $data_blog
+    ]);
+});

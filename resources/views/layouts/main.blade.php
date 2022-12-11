@@ -11,8 +11,9 @@
 
 <body>
 @include('partials/navbar')
+<div class="container mt-5">
 @yield('container')
-
+</div>
 </body>
 
 </html>
