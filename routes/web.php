@@ -31,11 +31,13 @@ Route::get('/posts', function () {
     $data_blog = [
         [
             "title" => "Blog 1",
+            "slug" => "slug-1",
             "author" => "Hermawan Tan",
             "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla maxime iste aut minus esse a non similique repudiandae, ut quisquam ipsam. Illo enim repellat nisi dignissimos, mollitia ducimus atque id asperiores aliquam qui voluptatum natus omnis cumque est sapiente, recusandae maiores. Maxime expedita blanditiis nihil voluptatem, est velit impedit adipisci."
         ],
         [
             "title" => "Blog 2",
+            "slug" => "slug-2",
             "author" => "Romashon",
             "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla maxime iste aut minus esse a non similique repudiandae, ut quisquam ipsam. Illo enim repellat nisi dignissimos, mollitia ducimus atque id asperiores aliquam qui voluptatum natus omnis cumque est sapiente, recusandae maiores. Maxime expedita blanditiis nihil voluptatem, est velit impedit adipisci."
         ]
@@ -43,5 +45,35 @@ Route::get('/posts', function () {
     return view('posts', [
         "title" => "Posts",
         "posts" => $data_blog
+    ]);
+});
+
+
+
+
+Route::get('posts/{slug}', function ($slug) {
+    $data_blog = [
+        [
+            "title" => "Blog 1",
+            "slug" => "slug-1",
+            "author" => "Hermawan Tan",
+            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla maxime iste aut minus esse a non similique repudiandae, ut quisquam ipsam. Illo enim repellat nisi dignissimos, mollitia ducimus atque id asperiores aliquam qui voluptatum natus omnis cumque est sapiente, recusandae maiores. Maxime expedita blanditiis nihil voluptatem, est velit impedit adipisci."
+        ],
+        [
+            "title" => "Blog 2",
+            "slug" => "slug-2",
+            "author" => "Romashon",
+            "body" => "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla maxime iste aut minus esse a non similique repudiandae, ut quisquam ipsam. Illo enim repellat nisi dignissimos, mollitia ducimus atque id asperiores aliquam qui voluptatum natus omnis cumque est sapiente, recusandae maiores. Maxime expedita blanditiis nihil voluptatem, est velit impedit adipisci."
+        ]
+    ];
+    $new_post = [];
+    foreach ($data_blog as $post) {
+        if ($post['slug'] === $slug) {
+            $new_post = $post;
+        }
+    }
+    return view('post', [
+        "title" => "Single Post",
+        "post" => $new_post
     ]);
 });
