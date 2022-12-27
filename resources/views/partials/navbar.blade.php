@@ -53,7 +53,7 @@
         </li>
         @else
         <li class="nav-item">
-          <a href="/login" class="nav-link {{ ($active=== " login") ? 'active' : '' }}">
+          <a href="/login" class="nav-link {{ Request::is('login') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login" width="28" height="28"
               viewBox="0 0 24 24" stroke-width="1" stroke="#9e9e9e" fill="none" stroke-linecap="round"
               stroke-linejoin="round">
