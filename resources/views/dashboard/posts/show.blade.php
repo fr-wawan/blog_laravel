@@ -17,7 +17,6 @@
         <p>{!!$post->body !!}</p>
       </article>
 
-      <a class="text-decoration-none" href="/posts">Back to Main Page</a>
     </div>
   </div>
 </div>

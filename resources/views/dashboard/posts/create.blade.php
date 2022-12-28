@@ -6,28 +6,49 @@
 </div>
 
 <div class="col-lg-6">
-  <form method="post" action="/dashboard/posts">
+  <form method="post" action="/dashboard/posts" class="mb-5">
 
     @csrf
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="email" class="form-control" id="title" name="title">
+      <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" required
+        autofocus value="{{ old('title') }}">
+
+      @error('title')
+      <div class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
     </div>
+
     <div class="mb-3">
       <label for="slug" class="form-label">Slug</label>
-      <input type="email" class="form-control" id="slug" name="slug" disabled readonly>
+      <input type="text" class="form-control  @error('slug') is-invalid @enderror" 2id="slug" name="slug"
+        value="{{ old('slug') }}" required>
+      @error('slug')
+      <div class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
     </div>
     <div class="mb-3">
       <label for="category" class="form-label">Category</label>
-      <select class="form-select" name="category_id">
+      <select class="form-select" name="category_id" required>
         @foreach ($categories as $category)
+        @if(old('category_id') == $category->id)
+        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+        @else
         <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endif
         @endforeach
       </select>
     </div>
     <div class="mb-3">
       <label for="body" class="form-label">Body</label>
-      <input id="body" type="hidden" name="body">
+      @error('body')
+      <p class="text-danger">{{ $message }}</p>
+      @enderror
+      <input id="body" type="hidden" name="body" required value="{{ old('body') }}">
       <trix-editor input="body"></trix-editor>
     </div>
     <button type="submit" class="btn btn-primary">Create Post</button>
@@ -42,6 +63,10 @@
     fetch('/dashboard/posts/checkSlug?title=' + title.value)
     .then(response => response.json())
     .then(data => slug.value = data.slug)
+  });
+
+  document.addEventListener('trix-file-accept', function(e){
+    e.preventDefault();
   })
 </script>
 
