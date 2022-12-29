@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function auth(Request $request)
     {
         $credential =  $request->validate([
-            'email' => ['required', 'email:dns'],
+            'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
@@ -34,11 +34,11 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-    
+
         $request->session()->invalidate();
-    
+
         $request->session()->regenerateToken();
-    
+
         return redirect('/');
     }
 }
